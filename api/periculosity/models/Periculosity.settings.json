@@ -1,0 +1,18 @@
+{
+  "connection": "default",
+  "collectionName": "periculosities",
+  "info": {
+    "name": "periculosity",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "description": {
+      "type": "string"
+    }
+  }
+}

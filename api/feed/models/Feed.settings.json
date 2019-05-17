@@ -1,8 +1,8 @@
 {
   "connection": "default",
-  "collectionName": "statuses",
+  "collectionName": "feeds",
   "info": {
-    "name": "status",
+    "name": "feed",
     "description": ""
   },
   "options": {
@@ -11,7 +11,7 @@
     "comment": ""
   },
   "attributes": {
-    "status": {
+    "name": {
       "type": "string"
     }
   }

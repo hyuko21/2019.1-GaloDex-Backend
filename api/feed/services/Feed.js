@@ -1,8 +1,8 @@
-/* global Status */
+/* global Feed */
 'use strict';
 
 /**
- * Status.js service
+ * Feed.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
@@ -18,43 +18,43 @@ const { convertRestQueryParams, buildQuery } = require('strapi-utils');
 module.exports = {
 
   /**
-   * Promise to fetch all statuses.
+   * Promise to fetch all feeds.
    *
    * @return {Promise}
    */
 
   fetchAll: (params, populate) => {
     // Select field to populate.
-    const withRelated = populate || Status.associations
+    const withRelated = populate || Feed.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
     const filters = convertRestQueryParams(params);
 
-    return Status.query(buildQuery({ model: Status, filters }))
+    return Feed.query(buildQuery({ model: Feed, filters }))
       .fetchAll({ withRelated })
       .then(data => data.toJSON());
   },
 
   /**
-   * Promise to fetch a/an status.
+   * Promise to fetch a/an feed.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Status.associations
+    const populate = Feed.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    return Status.forge(_.pick(params, 'id')).fetch({
+    return Feed.forge(_.pick(params, 'id')).fetch({
       withRelated: populate
     });
   },
 
   /**
-   * Promise to count a/an status.
+   * Promise to count a/an feed.
    *
    * @return {Promise}
    */
@@ -63,54 +63,54 @@ module.exports = {
     // Convert `params` object to filters compatible with Bookshelf.
     const filters = convertRestQueryParams(params);
 
-    return Status.query(buildQuery({ model: Status, filters: _.pick(filters, 'where') })).count();
+    return Feed.query(buildQuery({ model: Feed, filters: _.pick(filters, 'where') })).count();
   },
 
   /**
-   * Promise to add a/an status.
+   * Promise to add a/an feed.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Status.associations.map(ast => ast.alias));
-    const data = _.omit(values, Status.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Feed.associations.map(ast => ast.alias));
+    const data = _.omit(values, Feed.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Status.forge(data).save();
+    const entry = await Feed.forge(data).save();
 
     // Create relational data and return the entry.
-    return Status.updateRelations({ id: entry.id , values: relations });
+    return Feed.updateRelations({ id: entry.id , values: relations });
   },
 
   /**
-   * Promise to edit a/an status.
+   * Promise to edit a/an feed.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Status.associations.map(ast => ast.alias));
-    const data = _.omit(values, Status.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Feed.associations.map(ast => ast.alias));
+    const data = _.omit(values, Feed.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Status.forge(params).save(data);
+    const entry = await Feed.forge(params).save(data);
 
     // Create relational data and return the entry.
-    return Status.updateRelations(Object.assign(params, { values: relations }));
+    return Feed.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an status.
+   * Promise to remove a/an feed.
    *
    * @return {Promise}
    */
 
   remove: async (params) => {
     params.values = {};
-    Status.associations.map(association => {
+    Feed.associations.map(association => {
       switch (association.nature) {
         case 'oneWay':
         case 'oneToOne':
@@ -127,41 +127,41 @@ module.exports = {
       }
     });
 
-    await Status.updateRelations(params);
+    await Feed.updateRelations(params);
 
-    return Status.forge(params).destroy();
+    return Feed.forge(params).destroy();
   },
 
   /**
-   * Promise to search a/an status.
+   * Promise to search a/an feed.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Bookshelf.
-    const filters = strapi.utils.models.convertParams('status', params);
+    const filters = strapi.utils.models.convertParams('feed', params);
     // Select field to populate.
-    const populate = Status.associations
+    const populate = Feed.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias);
 
-    const associations = Status.associations.map(x => x.alias);
-    const searchText = Object.keys(Status._attributes)
-      .filter(attribute => attribute !== Status.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['string', 'text'].includes(Status._attributes[attribute].type));
+    const associations = Feed.associations.map(x => x.alias);
+    const searchText = Object.keys(Feed._attributes)
+      .filter(attribute => attribute !== Feed.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['string', 'text'].includes(Feed._attributes[attribute].type));
 
-    const searchInt = Object.keys(Status._attributes)
-      .filter(attribute => attribute !== Status.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['integer', 'decimal', 'float'].includes(Status._attributes[attribute].type));
+    const searchInt = Object.keys(Feed._attributes)
+      .filter(attribute => attribute !== Feed.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['integer', 'decimal', 'float'].includes(Feed._attributes[attribute].type));
 
-    const searchBool = Object.keys(Status._attributes)
-      .filter(attribute => attribute !== Status.primaryKey && !associations.includes(attribute))
-      .filter(attribute => ['boolean'].includes(Status._attributes[attribute].type));
+    const searchBool = Object.keys(Feed._attributes)
+      .filter(attribute => attribute !== Feed.primaryKey && !associations.includes(attribute))
+      .filter(attribute => ['boolean'].includes(Feed._attributes[attribute].type));
 
     const query = (params._q || '').replace(/[^a-zA-Z0-9.-\s]+/g, '');
 
-    return Status.query(qb => {
+    return Feed.query(qb => {
       if (!_.isNaN(_.toNumber(query))) {
         searchInt.forEach(attribute => {
           qb.orWhereRaw(`${attribute} = ${_.toNumber(query)}`);
@@ -175,7 +175,7 @@ module.exports = {
       }
 
       // Search in columns with text using index.
-      switch (Status.client) {
+      switch (Feed.client) {
         case 'mysql':
           qb.orWhereRaw(`MATCH(${searchText.join(',')}) AGAINST(? IN BOOLEAN MODE)`, `*${query}*`);
           break;

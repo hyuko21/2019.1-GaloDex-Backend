@@ -1,0 +1,43 @@
+{
+  "connection": "default",
+  "collectionName": "animals",
+  "info": {
+    "name": "animal",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "general_name": {
+      "required": true,
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": true
+    },
+    "category": {
+      "model": "category"
+    },
+    "periculosity": {
+      "model": "periculosity"
+    },
+    "avg_size": {
+      "type": "integer"
+    },
+    "avg_weight": {
+      "type": "integer"
+    },
+    "lifetime": {
+      "type": "integer"
+    },
+    "sci_name": {
+      "type": "string"
+    }
+  }
+}

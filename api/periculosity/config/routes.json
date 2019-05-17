@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/periculosities",
+      "handler": "Periculosity.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/periculosities/count",
+      "handler": "Periculosity.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/periculosities/:id",
+      "handler": "Periculosity.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/periculosities",
+      "handler": "Periculosity.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/periculosities/:id",
+      "handler": "Periculosity.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/periculosities/:id",
+      "handler": "Periculosity.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

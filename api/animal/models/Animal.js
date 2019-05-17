@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Lifecycle callbacks for the `Status` model.
+ * Lifecycle callbacks for the `Animal` model.
  */
 
 module.exports = {

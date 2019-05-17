@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/statuses",
-      "handler": "Status.find",
+      "path": "/animals",
+      "handler": "Animal.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/statuses/count",
-      "handler": "Status.count",
+      "path": "/animals/count",
+      "handler": "Animal.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/statuses/:id",
-      "handler": "Status.findOne",
+      "path": "/animals/:id",
+      "handler": "Animal.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/statuses",
-      "handler": "Status.create",
+      "path": "/animals",
+      "handler": "Animal.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/statuses/:id",
-      "handler": "Status.update",
+      "path": "/animals/:id",
+      "handler": "Animal.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/statuses/:id",
-      "handler": "Status.destroy",
+      "path": "/animals/:id",
+      "handler": "Animal.destroy",
       "config": {
         "policies": []
       }
